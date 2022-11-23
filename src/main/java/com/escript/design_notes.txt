@@ -1,0 +1,18 @@
+1. A measure for how friendly a group of people is. 2022-10-23
+I think it's safe to assume that we are working with a clique,
+that is, a connected subgraph of the overall social network.
+
+Claim: The longest path in such a clique is a good measure for
+how friendly a group is.
+
+1.1 Such a path cannot be simple, as that leads to nonsensical results:
+- Imagine a friend network that looks like this:
+F1 - F2 - F3 - ... - F100 (a chain of friends, free of loops)
+This kind of network would have the exact same friendliness measure as
+a network of 100 friends where everyone was friends with each other
+(like a complete graph with 100 nodes, K_100).
+
+1.2 Therefore the path is non-simple.
+Goal: Find the longest non-simple path in an undirected graph.
+
+
