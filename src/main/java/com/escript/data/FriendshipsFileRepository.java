@@ -6,13 +6,13 @@ import com.escript.exceptions.contextful.FriendshipDoesNotExistException;
 
 import java.nio.file.Path;
 
-public class Friendships extends FileRepository<Long, Friendship>{
+public class FriendshipsFileRepository extends FileRepository<Long, Friendship>{
     /**
      * Constructor a Friendship repository
      *
      * @param id_generator An object that will generate a unique ID for every new element
      */
-    public Friendships(ID_Generator<Long> id_generator, Path filepath) {
+    public FriendshipsFileRepository(ID_Generator<Long> id_generator, Path filepath) {
         super(filepath, filepath, Friendship::fromCSV);
     }
 

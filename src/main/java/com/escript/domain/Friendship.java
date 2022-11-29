@@ -4,14 +4,20 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Friendship extends Storable<Long> {
-    private final long userID1;
-    private final long userID2;
+    private long userID1;
+    private long userID2;
     private final LocalDateTime friendsSince;
 
     private int messagingStreak;
     private int longestMessagingStreak;
 
+    public void setUserID1(long userID1) {
+        this.userID1 = userID1;
+    }
 
+    public void setUserID2(long userID2) {
+        this.userID2 = userID2;
+    }
     public int getMessagingStreak() {
         return messagingStreak;
     }
@@ -24,6 +30,15 @@ public class Friendship extends Storable<Long> {
 
     public int getLongestMessagingStreak() {
         return longestMessagingStreak;
+    }
+
+    public Friendship(long friendshipID, long userID1, long userID2, LocalDateTime friendsSince, int currentStreak, int bestStreak) {
+        super.setIdentifier(friendshipID);
+        this.userID1 = userID1;
+        this.userID2 = userID2;
+        this.friendsSince = friendsSince;
+        this.messagingStreak = currentStreak;
+        this.longestMessagingStreak = bestStreak;
     }
 
     public Friendship(long userID1, long userID2, LocalDateTime friendsSince) {

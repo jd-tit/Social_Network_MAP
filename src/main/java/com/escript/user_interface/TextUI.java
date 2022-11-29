@@ -1,6 +1,7 @@
 package com.escript.user_interface;
 
 import com.escript.ctrl.UserService;
+import com.escript.data.IdPair;
 import com.escript.domain.User;
 import com.escript.exceptions.DuplicateElementException;
 import com.escript.exceptions.ID_NotFoundException;
@@ -90,9 +91,17 @@ public class TextUI {
         System.out.println("ID of user 2:");
         var id2 = scanner.nextLong();
         scanner.nextLine(); //skip forward
+        IdPair idPair;
 
         try {
-            userService.incrementStreak(id1, id2);
+            idPair = new IdPair(id1, id2);
+        } catch (DuplicateElementException e) {
+            System.err.println("The IDs are equal!");
+            return;
+        }
+
+        try {
+            userService.incrementStreak(idPair);
         } catch (UserDoesNotExistException e) {
             if(userService.getUserByID(id1) == null)
                 System.err.printf("There is no user with an ID equal to <%d>.%n", id1);
@@ -103,7 +112,7 @@ public class TextUI {
                 "<%s> and <%s> have now been chatting for %d days!%n",
                 userService.getUserByID(id1).getUsername(),
                 userService.getUserByID(id2).getUsername(),
-                userService.getFriendshipByUserIDs(id1, id2).getMessagingStreak()
+                userService.getFriendshipByUserIDs(idPair).getMessagingStreak()
         );
     }
 
@@ -141,10 +150,18 @@ public class TextUI {
         var id1 = scanner.nextLong();
         System.out.println("ID of user 2:");
         var id2 = scanner.nextLong();
+        IdPair idPair;
         scanner.nextLine(); //skip forward
 
+        try {
+            idPair = new IdPair(id1, id2);
+        } catch (DuplicateElementException e) {
+            System.err.println("The IDs are equal!");
+            return;
+        }
+
         try{
-            userService.markFriends(id1, id2);
+            userService.markFriends(idPair);
         } catch (FriendshipAlreadyRegisteredException e) {
             System.err.printf("The users  \"%s\" and \"%s\" already are friends%n",
                     userService.getUserByID(id1),
@@ -172,10 +189,18 @@ public class TextUI {
         var id1 = scanner.nextLong();
         System.out.println("ID of user 2:");
         var id2 = scanner.nextLong();
+        IdPair idPair;
         scanner.nextLine(); //skip forward
 
+        try {
+            idPair = new IdPair(id1, id2);
+        } catch (DuplicateElementException e) {
+            System.err.println("The IDs are equal!");
+            return;
+        }
+
         try{
-            userService.unmarkFriends(id1, id2);
+            userService.unmarkFriends(idPair);
         } catch (UserDoesNotExistException e) {
             if(userService.getUserByID(id1) == null)
                 System.err.printf("There is no user with an ID equal to <%d>.%n", id1);

@@ -160,3 +160,7 @@ replay_pid*
 
 ## Exclude csv files, so that we don't upload user data by accident -- Ema, 2022-11-23
 *.csv
+
+## docs folder can be generated
+docs/
+target/

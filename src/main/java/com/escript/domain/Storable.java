@@ -1,7 +1,7 @@
 package com.escript.domain;
 
 public abstract class Storable<ID_type>{
-    ID_type id;
+    private ID_type id;
     public ID_type getIdentifier() {
         return id;
     }
