@@ -1,6 +1,6 @@
-package com.escript.user_interface;
+package com.escript.user_interface.text;
 
-import com.escript.ctrl.UserService;
+import com.escript.service.UserService;
 import com.escript.data.IdPair;
 import com.escript.domain.User;
 import com.escript.exceptions.DuplicateElementException;
@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 /**
  * Handle UI tasks using a text interface
- */
+ *//*
 public class TextUI {
     private static TextUI instance;
     private final UserService userService;
@@ -34,12 +34,12 @@ public class TextUI {
             new TextMenuItem("lf", "List all friendships"),
             new TextMenuItem("mcc", "List the members of the most connected community in our network"),
             new TextMenuItem("rs", "Reset all current streaks, as if it were a new day"),
-            new TextMenuItem("is", "Increment two user's messaging streak")
+            new TextMenuItem("is", "Increment two users's messaging streak")
     };
 
     /**
      * Get the instance of the class' singleton
-     */
+
     public static TextUI getInstance(){
         if(TextUI.instance == null)
             TextUI.instance = new TextUI();
@@ -117,7 +117,7 @@ public class TextUI {
     }
 
     private void addUser(){
-        System.out.println("Choose an username for the new user");
+        System.out.println("Choose a username for the new user");
         var username = scanner.nextLine();
         username = username.trim();
 
@@ -273,3 +273,4 @@ public class TextUI {
         System.out.printf("The command \"%s\" could not be found. Please try something else.%n", notFound);
     }
 }
+*/

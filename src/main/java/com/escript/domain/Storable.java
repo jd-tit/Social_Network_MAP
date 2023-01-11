@@ -5,11 +5,7 @@ public abstract class Storable<ID_type>{
     public ID_type getIdentifier() {
         return id;
     }
-
-    public abstract String toCSV();
     public void setIdentifier(ID_type identifier) {
         this.id = identifier;
     }
-
-    public abstract int compareID(ID_type id);
 }

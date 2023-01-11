@@ -1,5 +1,8 @@
 package com.escript.domain;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -75,17 +78,17 @@ public class Friendship extends Storable<Long> {
         return Objects.hash(userID1, userID2);
     }
 
-    @Override
-    public String toCSV() {
-        return String.join(",",
-                Long.toString(getIdentifier()),
-                Long.toString(userID1),
-                Long.toString(userID2),
-                friendsSince.toString(),
-                Integer.toString(messagingStreak),
-                Integer.toString(longestMessagingStreak)
-        );
-    }
+//    @Override
+//    public String toCSV() {
+//        return String.join(",",
+//                Long.toString(getIdentifier()),
+//                Long.toString(userID1),
+//                Long.toString(userID2),
+//                friendsSince.toString(),
+//                Integer.toString(messagingStreak),
+//                Integer.toString(longestMessagingStreak)
+//        );
+//    }
 
     public static Friendship fromCSV(String string) {
         var parts = string.split(",");
@@ -101,10 +104,5 @@ public class Friendship extends Storable<Long> {
         result.longestMessagingStreak = longestStreak;
         result.setIdentifier(identifier);
         return result;
-    }
-
-    @Override
-    public int compareID(Long id) {
-        return getIdentifier().compareTo(id);
     }
 }

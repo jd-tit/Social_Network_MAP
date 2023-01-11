@@ -5,5 +5,5 @@ package com.escript.data;
  * @param <ID_type> The ID datatype
  */
 public interface ID_Generator <ID_type> {
-    public ID_type nextID();
+    ID_type nextID();
 }

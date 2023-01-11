@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.escript.user_interface.gui.controller.Register">
+
+    <VBox alignment="CENTER" maxHeight="-Infinity"
+          maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+        <Label text="SocNetMAP" style="-fx-font-size: 20; -fx-font-family: Roboto"/>
+
+        <Label text="Username"/>
+        <TextField fx:id="usernameInput"/>
+
+        <Label text="Password"/>
+        <PasswordField fx:id="passwordInput"/>
+        <Label text="Confirm password"/>
+        <PasswordField fx:id="confirmPasswordInput"/>
+
+        <Button text="Create account" onAction="#createAccount"/>
+
+        <Text text="Have an account?"/>
+        <Hyperlink text="Login instead" onAction="#login"/>
+        <padding>
+            <Insets left="50.0" right="50.0" />
+        </padding>
+    </VBox>
+
+</AnchorPane>
