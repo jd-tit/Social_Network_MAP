@@ -1,9 +1,7 @@
 package com.escript.domain;
 
-import com.escript.data.RequestIdPair;
+import com.escript.data.ArrowIdPair;
 
-import java.io.IOError;
-import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
 
@@ -12,13 +10,13 @@ import static com.escript.domain.FriendRequest.State.*;
 public class FriendRequest extends Storable<Long> {
     public enum State {PENDING, DENIED, ACCEPTED, RETRACTED}
     private final State state;
-    private final RequestIdPair idPair;
+    private final ArrowIdPair idPair;
     private final LocalDateTime dateSent;
 
     public FriendRequest(Long senderId, Long receiverId, LocalDateTime dateSent, State state)
     {
         this.state = state;
-        this.idPair = new RequestIdPair(senderId, receiverId);
+        this.idPair = new ArrowIdPair(senderId, receiverId);
         this.dateSent = dateSent;
     }
 
@@ -44,7 +42,7 @@ public class FriendRequest extends Storable<Long> {
     public FriendRequest(Long senderId, Long receiverId, LocalDateTime dateSent, Integer state) {
         this.state = getStateForNumber(state);
         this.dateSent = dateSent;
-        this.idPair = new RequestIdPair(senderId, receiverId);
+        this.idPair = new ArrowIdPair(senderId, receiverId);
     }
 
     public LocalDateTime getDateSent() {
@@ -55,7 +53,7 @@ public class FriendRequest extends Storable<Long> {
         return state;
     }
 
-    public RequestIdPair getIdPair() {
+    public ArrowIdPair getIdPair() {
         return idPair;
     }
 }

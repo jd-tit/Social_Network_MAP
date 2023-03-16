@@ -14,4 +14,8 @@ public class Main {
     public void quit(ActionEvent actionEvent) {
         Platform.exit();
     }
+
+    public void messageSelectView(ActionEvent actionEvent) throws IOException {
+        GuiService.setView(GuiService.views.MESSAGE_SELECT);
+    }
 }

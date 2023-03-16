@@ -2,7 +2,7 @@ package com.escript.service;
 
 import com.escript.data.IdPair;
 import com.escript.data.RequestDbRepo;
-import com.escript.data.RequestIdPair;
+import com.escript.data.ArrowIdPair;
 import com.escript.domain.Account;
 import com.escript.domain.FriendRequest;
 import com.escript.domain.FriendRequestDTO;
@@ -76,7 +76,7 @@ public class RequestService {
         var userService = GuiContext.getUserServiceProvider();
         Account target = userService.getAccount(username);
         requestRepo.addRequest(
-                new RequestIdPair(
+                new ArrowIdPair(
                         GuiContext.getAccount().getIdentifier(),
                         target.getIdentifier()
                 ));
@@ -99,5 +99,9 @@ public class RequestService {
         } catch (DuplicateElementException | UserDoesNotExistException | FriendshipAlreadyRegisteredException e) {
             throw new IOError(e);
         }
+    }
+
+    public void closeConnection() throws SQLException {
+        requestRepo.closeConnection();
     }
 }

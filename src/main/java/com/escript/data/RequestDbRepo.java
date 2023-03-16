@@ -95,7 +95,7 @@ public class RequestDbRepo extends DbRepository {
         }
     }
 
-    public void addRequest(RequestIdPair idPair) throws SQLException {
+    public void addRequest(ArrowIdPair idPair) throws SQLException {
         String cmd = "INSERT INTO sn.friend_requests " +
                 "(sender_id, receiver_id, sent, state) VALUES " +
                 "(?, ?, CURRENT_TIMESTAMP, 1)";

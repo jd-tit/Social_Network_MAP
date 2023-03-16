@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GuiService {
-    public enum views {MAIN, LOGIN, REGISTER, REQUESTS}
+    public enum views {MAIN, LOGIN, REGISTER, REQUESTS, MESSAGE_SELECT, MESSAGE}
     private static Stage stage;
 
     public static void init(Stage stage) {
@@ -29,6 +29,8 @@ public class GuiService {
             case LOGIN -> "/fxml/LoginView.fxml";
             case REGISTER -> "/fxml/RegisterView.fxml";
             case REQUESTS -> "/fxml/RequestView.fxml";
+            case MESSAGE -> "/fxml/MessageView.fxml";
+            case MESSAGE_SELECT -> "/fxml/MessageSelectView.fxml";
         };
 
         FXMLLoader fxmlLoader = new FXMLLoader(

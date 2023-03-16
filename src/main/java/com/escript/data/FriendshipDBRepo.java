@@ -3,6 +3,7 @@ package com.escript.data;
 import com.escript.domain.Friendship;
 import com.escript.domain.FriendshipDTO;
 import com.escript.domain.User;
+import com.escript.domain.UserDTO;
 import com.escript.exceptions.DuplicateElementException;
 import com.escript.exceptions.ID_NotFoundException;
 import com.escript.exceptions.contextful.FriendshipDoesNotExistException;
@@ -184,19 +185,22 @@ public class FriendshipDBRepo extends DbRepository {
         }
     }
 
-    public Collection<User> friendsOf(String username) {
-        String cmd = "SELECT U2.username AS username FROM sn.users U" +
+    public Collection<UserDTO> friendsOf(String username) {
+        String cmd = "SELECT U2.username, U2.id AS username FROM sn.users U" +
                 " JOIN sn.friends F ON U.id = F.user_id " +
                 " JOIN sn.users U2 ON U2.id = F.friendship_id " +
                 " WHERE U.username = ? AND U.id <> U2.id " +
                 " ORDER BY U2.id";
-        ArrayList<User> result = new ArrayList<>();
+        ArrayList<UserDTO> result = new ArrayList<>();
         try (var s = connection.prepareStatement(cmd)) {
             s.setString(1, username);
             try (var rs = s.executeQuery()) {
                 while (rs.next())
                     result.add(
-                            new User(rs.getString("username")));
+                            new UserDTO(
+                                    AccountDBRepo.extractUser(rs),
+                                    rs.getLong("id")
+                            ));
                 return result;
             }
         } catch (SQLException e) {
@@ -216,8 +220,8 @@ public class FriendshipDBRepo extends DbRepository {
         String cmd = "UPDATE sn.friendships SET current_message_streak = current_message_streak + 1 " +
                 "WHERE friendship_id IN " +
                 "(SELECT fs.friendship_id FROM friendships fs " +
-                "JOIN friends f1 on fs.friendship_id = f1.friendship_id " +
-                "JOIN friends f2 ON fs.friendship_id = f2.friendship_id " +
+                "JOIN sn.friends f1 on fs.friendship_id = f1.friendship_id " +
+                "JOIN sn.friends f2 ON fs.friendship_id = f2.friendship_id " +
                 "WHERE f1.user_id = ? AND f2.user_id = ?)";
         try (PreparedStatement s = connection.prepareStatement(cmd)) {
             s.setLong(1, idPair.getFirst());
@@ -248,5 +252,32 @@ public class FriendshipDBRepo extends DbRepository {
                 extractFriendship(rs),
                 rs.getString("friend_username")
                 );
+    }
+
+    public Collection<UserDTO> friendsHavingUsernameLike(Long userId, String usernameFragment) {
+        String cmd = "SELECT U2.username as username, U2.id AS id FROM sn.users U" +
+                " JOIN sn.friends F ON U.id = F.user_id " +
+                " JOIN sn.friends F2 ON F.friendship_id = F2.friendship_id " +
+                " JOIN sn.users U2 ON U2.id = F2.user_id " +
+                " WHERE U.id = ? AND U.id <> U2.id " +
+                " AND U2.username LIKE ? " +
+                " ORDER BY U2.id";
+        ArrayList<UserDTO> result = new ArrayList<>();
+        try (var s = connection.prepareStatement(cmd)) {
+            s.setLong(1, userId);
+            s.setString(2, String.format("%%%s%%", usernameFragment));
+            try (var rs = s.executeQuery()) {
+                while (rs.next())
+                    result.add(
+                            new UserDTO(
+                                    AccountDBRepo.extractUser(rs),
+                                    rs.getLong("id")
+                            ));
+                return result;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new IOError(e);
+        }
     }
 }

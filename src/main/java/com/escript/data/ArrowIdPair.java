@@ -1,10 +1,10 @@
 package com.escript.data;
 
-public class RequestIdPair {
+public class ArrowIdPair {
     private final Long senderId;
     private final Long receiverId;
 
-    public RequestIdPair(long senderId, long receiverId) {
+    public ArrowIdPair(long senderId, long receiverId) {
         this.senderId = senderId;
         this.receiverId = receiverId;
     }

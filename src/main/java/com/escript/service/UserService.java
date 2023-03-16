@@ -137,8 +137,12 @@ public class UserService {
         return accountRepo.getAll();
     }
 
-    public Iterable<User> friendsOf(String username) {
+    public Collection<UserDTO> friendsOf(String username) {
         return friendshipRepo.friendsOf(username);
+    }
+
+    public Collection<UserDTO> friendsHavingUsernameLike(Long userId, String usernameFragment) {
+        return friendshipRepo.friendsHavingUsernameLike(userId, usernameFragment);
     }
 
     public Collection<FriendshipDTO> friendshipsOf(Long userId) {

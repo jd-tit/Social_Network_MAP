@@ -1,16 +1,14 @@
 package com.escript;
 
 import com.escript.exceptions.DuplicateElementException;
-import com.escript.service.GuiContext;
-import com.escript.service.GuiService;
-import com.escript.service.RequestService;
-import com.escript.service.UserService;
+import com.escript.service.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
 public class FXApp extends Application {
@@ -19,6 +17,7 @@ public class FXApp extends Application {
         try {
             GuiContext.setUserServiceProvider(new UserService());
             GuiContext.setRequestServiceProvider(new RequestService());
+            GuiContext.setMessageServiceProvider(new MessageService());
             GuiService.init(primaryStage, GuiService.views.LOGIN);
         } catch (IOException | RuntimeException | SQLException e) {
             GuiService.showErrorMessage(e.getMessage());
@@ -31,10 +30,13 @@ public class FXApp extends Application {
 
     @Override
     public void stop() throws Exception {
+        GuiContext.getMessageServiceProvider().stopAutoUpdate();
         GuiContext.getUserServiceProvider().closeConnections();
+        GuiContext.getMessageServiceProvider().closeConnection();
+        GuiContext.getRequestServiceProvider().closeConnection();
     }
 
-    private void exceptionHandler(Throwable e) {
+    public static void exceptionHandler(Throwable e) {
         GuiService.showErrorMessage(e.getMessage());
         e.printStackTrace();
         if(e instanceof IOException || e instanceof RuntimeException || e instanceof SQLException) {
