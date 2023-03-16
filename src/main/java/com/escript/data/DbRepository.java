@@ -6,12 +6,9 @@ import java.sql.*;
 
 public abstract class DbRepository {
     public final String uniqueViolationCode = "23505";
-    private final String tableName;
     protected final Connection connection;
 
-    public DbRepository(String tableName) {
-        this.tableName = tableName;
-
+    public DbRepository() {
         Properties props = new Properties();
         //TODO: Please move this to some kind of environment var
         props.setProperty("user", "soc_net_crud");

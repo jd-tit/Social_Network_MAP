@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class AccountDBRepo extends DbRepository {
-    public AccountDBRepo(String tableName) {
-        super(tableName);
+    public AccountDBRepo() {
+        super();
     }
 
     public long add(Account account) throws DuplicateElementException, SQLException {

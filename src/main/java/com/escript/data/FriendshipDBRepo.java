@@ -16,8 +16,8 @@ import java.util.Collection;
 public class FriendshipDBRepo extends DbRepository {
     //TODO: Use the `tableName` in queries
 
-    public FriendshipDBRepo(String tableName) {
-        super(tableName);
+    public FriendshipDBRepo() {
+        super();
     }
 
     public void add(Friendship f) throws SQLException, DuplicateElementException {

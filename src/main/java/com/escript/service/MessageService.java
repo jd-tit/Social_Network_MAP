@@ -21,7 +21,7 @@ public class MessageService {
 
     public MessageService() {
         this.messageList = FXCollections.observableArrayList();
-        this.messageRepo = new MessageDbRepo("messages");
+        this.messageRepo = new MessageDbRepo();
         GuiContext.getMessageFriendProperty().addListener(observable -> {
             messageList.clear();
             updateList();

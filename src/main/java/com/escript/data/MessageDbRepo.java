@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class MessageDbRepo extends DbRepository {
-    public MessageDbRepo(String tableName) {
-        super(tableName);
+    public MessageDbRepo() {
+        super();
     }
 
     public long add(Message message) {

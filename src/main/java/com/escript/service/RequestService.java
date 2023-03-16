@@ -26,7 +26,7 @@ public class RequestService {
     private final ObservableList<FriendRequestDTO> outboundRequests;
 
     public RequestService() {
-        requestRepo = new RequestDbRepo("Friend_requests");
+        requestRepo = new RequestDbRepo();
         inboundRequests = FXCollections.observableArrayList();
         inboundPendingRequests = FXCollections.observableArrayList();
         outboundRequests = FXCollections.observableArrayList();

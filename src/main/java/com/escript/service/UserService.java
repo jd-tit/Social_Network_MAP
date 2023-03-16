@@ -24,8 +24,8 @@ public class UserService {
     public UserService() throws DuplicateElementException, SQLException {
         //TODO: Actually use the table names
 
-        accountRepo = new AccountDBRepo("Users");
-        friendshipRepo = new FriendshipDBRepo("Friendships");
+        accountRepo = new AccountDBRepo();
+        friendshipRepo = new FriendshipDBRepo();
 
         friendshipGraph = new Graph<>();
 

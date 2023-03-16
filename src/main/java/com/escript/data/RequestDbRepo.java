@@ -13,8 +13,8 @@ import java.util.Collection;
 import static com.escript.data.AccountDBRepo.extractUser;
 
 public class RequestDbRepo extends DbRepository {
-    public RequestDbRepo(String tableName) {
-        super(tableName);
+    public RequestDbRepo() {
+        super();
     }
 
     public Collection<FriendRequestDTO> requestsSentBy(String username) throws SQLException {
